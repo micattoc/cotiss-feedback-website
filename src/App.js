@@ -49,16 +49,22 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div class="App">
     <h1>{Item.Comment}</h1>
 
     <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={feedbackText}
-        onChange={(e) => setFeedbackText(e.target.value)}
-      />
-      <button type="submit">Submit</button>
+
+      <div class="text-field">
+        <input
+          id="feedback-field"
+          type="text"
+          value={feedbackText}
+          placeholder="Enter feedback"
+          onChange={(e) => setFeedbackText(e.target.value)}
+          />
+      </div>
+      
+      <button type="submit" class="form-submit-button">Submit</button>
 
       <div className="message">{message ? <p>{message}</p> : null}</div>
     </form>

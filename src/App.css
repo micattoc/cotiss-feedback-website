@@ -1,38 +1,70 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-direction: column;
+  height: 20em;
 }
 
-.App-link {
-  color: #61dafb;
+form {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.text-field::after {
+  content: attr(aria-label);
+}
+
+.text-field {
+  font-size: 14px;
+  position: relative;
+  --field-padding: 20px;
+  border-top: 20px solid transparent;
+}
+
+.text-field input {
+  border: none;
+  -webkit-appearance: none;
+  -ms-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: #ffffff;
+  border-radius: 3px;
+  width: 500px;
+  font-size: 20px;
+  padding: var(--field-padding);
+}
+
+input:focus + .placeholder {
+  color: transparent;
+}
+
+.form-submit-button {
+  display: block;
+  margin-top: 20px;
+  text-align: center;
+  padding: 15px;
+  font-size: 20px;
+	background: #016ABC;
+	color: #fff;
+	border: 1px solid #eee;
+	border-radius: 5px;
+	box-shadow: 5px 5px 5px rgb(239, 232, 232);
+	text-shadow: none;
+}
+
+.form-submit-button:hover {
+	background: #B9DFFF;
+	color: #fff;
+	border: 1px solid #eee;
+	border-radius: 5px;
+	box-shadow: 5px 5px 5px #eee;
+	text-shadow: none;
 }
