@@ -1,59 +1,69 @@
 import './App.css';
+import React from 'react';
+import { useState, useEffect, useRef } from "react";
 
-/*
 function App() {
+
+  const [Item, setItem] = useState("");
+  const [feedbackText, setFeedbackText] = useState("");
+  const [message, setMessage] = useState("");
+  const effectRan = useRef(false);
+
+  useEffect(() => {
+    if (!effectRan.current) {
+      fetch(
+        "https://yvdfnlqpj5.execute-api.ap-southeast-2.amazonaws.com/prod/read",
+        {
+          headers : { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data.Item);
+          setItem(data.Item);
+        })
+        effectRan.current = true;
+    }
+  }, []);
+
+  let handleSubmit = async (e) =>  {
+    e.preventDefault();
+    try {
+        let res = await fetch("https://ldgh10p5v2.execute-api.ap-southeast-2.amazonaws.com/prod/write", {
+        method: "POST",
+        body: JSON.stringify({
+          newFeedback: feedbackText,
+        }),
+      });
+      if (res.status === 200) {
+        setFeedbackText("");
+        setMessage("Success!");
+      } else {
+        setMessage("Error");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <h1>{Item.Comment}</h1>
+
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        value={feedbackText}
+        onChange={(e) => setFeedbackText(e.target.value)}
+      />
+      <button type="submit">Submit</button>
+
+      <div className="message">{message ? <p>{message}</p> : null}</div>
+    </form>
     </div>
   );
 }
 
 export default App;
-*/
-
-import React from 'react';
-
-export default class EssayForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: 'Please input your feedback.'
-    };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(event) {
-    this.setState({value: event.target.value});
-  }
-
-  handleSubmit(event) {
-    alert('An essay was submitted: ' + this.state.value);
-    event.preventDefault();
-  }
-
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <textarea value={this.state.value} onChange={this.handleChange} />
-        <br></br>
-        <input type="submit" value="Submit" />
-      </form>
-    );
-  }
-}
