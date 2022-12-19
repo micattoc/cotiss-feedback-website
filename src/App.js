@@ -35,13 +35,13 @@ function App() {
         method: "POST",
         body: JSON.stringify({
           newFeedback: feedbackText,
-        }),
+        })
       });
       if (res.status === 200) {
         setFeedbackText("");
-        setMessage("Success!");
+        setMessage("Successfully submitted feedback!");
       } else {
-        setMessage("Error");
+        setMessage("An error occured submitting feedback.");
       }
     } catch (err) {
       console.log(err);
@@ -52,8 +52,8 @@ function App() {
     <div class="App">
     <h1>{Item.Comment}</h1>
 
-    <form onSubmit={handleSubmit}>
-
+    <form id="myForm" onSubmit={handleSubmit}>
+      <div class="message">{message ? <p>{message}</p> : null}</div>
       <div class="text-field">
         <input
           id="feedback-field"
@@ -65,8 +65,6 @@ function App() {
       </div>
       
       <button type="submit" class="form-submit-button">Submit</button>
-
-      <div className="message">{message ? <p>{message}</p> : null}</div>
     </form>
     </div>
   );
