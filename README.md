@@ -1,8 +1,8 @@
 # Feedback Website for Cotiss
 
-Cotiss (cotiss.com) leadership required a website where employees can anonymously submit feedback and view a randomly selected piece of existing feedback on each page load.
+[Cotiss](https://cotiss.com/) leadership required a website where employees can anonymously submit feedback and view a randomly selected piece of existing feedback on each page load.
 
-# Technologies used:
+## Technologies used:
 • Static Amazon S3 front-end website managed by Amazon CloudFront makes Javascript calls to API Gateway to execute read/write commands in DynamoDB table.
 
 • AWS API Gateway forwards HTTP requests to AWS Lambda functions to query data.
